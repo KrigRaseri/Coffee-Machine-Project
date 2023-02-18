@@ -9,6 +9,8 @@ public class Coffee {
     private int coffeeBeans;
     private int water;
     private int milk;
+    private int plastCups;
+    private int money;
 
     //Methods
     public void makeBeanJuice() {
@@ -35,6 +37,17 @@ public class Coffee {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void printCoffeeStats() {
+        System.out.printf("The coffee machine has:\n" +
+                "%d ml of water\n" +
+                "%d ml of milk\n" +
+                "%d g of coffee beans\n" +
+                "%d disposable cups\n" +
+                "$%d of money\n", getWater(), getMilk(), getCoffeeBeans(), getPlastCups(), getMoney());
+
+        System.out.println();
     }
 
 
@@ -72,6 +85,49 @@ public class Coffee {
 
 
 
+    public void fillCoffee() {
+        setWater(getWater() + Util.askWater());
+        setMilk(getMilk() + Util.askMilk());
+        setCoffeeBeans(getCoffeeBeans() + Util.askBeans());
+        setPlastCups(getPlastCups() + Util.askCups());
+        System.out.println();
+    }
+
+
+
+    public void buyCoffee() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+        int inp = sc.nextInt();
+
+        switch (inp) {
+            case 1:
+                setWater(getWater() - 250);
+                setCoffeeBeans(getCoffeeBeans() - 16);
+                setPlastCups(getPlastCups() - 1);
+                setMoney(getMoney() + 4);
+                break;
+
+            case 2:
+                setWater(getWater() - 350);
+                setMilk(getMilk() - 75);
+                setCoffeeBeans(getCoffeeBeans() - 20);
+                setPlastCups(getPlastCups() - 1);
+                setMoney(getMoney() + 7);
+                break;
+
+            case 3:
+                setWater(getWater() - 200);
+                setMilk(getMilk() - 100);
+                setCoffeeBeans(getCoffeeBeans() - 12);
+                setPlastCups(getPlastCups() - 1);
+                setMoney(getMoney() + 6);
+                break;
+
+        }
+    }
+
+
 
     //Constructors
     public Coffee() {}
@@ -82,29 +138,17 @@ public class Coffee {
         this.milk = milk;
     }
 
-
-    //Getters, Setters, Askers.
-    public static int askWater() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Write how many ml of water the coffee machine has:");
-        System.out.print("> ");
-        return sc.nextInt();
+    public Coffee(int water, int milk, int beans, int plastCups, int money) {
+        this.coffeeBeans = beans;
+        this.water = water;
+        this.milk = milk;
+        this.plastCups = plastCups;
+        this.money = money;
     }
 
-    public static int askMilk() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Write how many ml of milk the coffee machine has:");
-        System.out.print("> ");
-        return sc.nextInt();
-    }
 
-    public static int askBeans() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Write how many grams of coffee beans the coffee machine has:");
-        System.out.print("> ");
-        return sc.nextInt();
-    }
 
+    //Getters, Setters.
     public int getCoffeeBeans() {
         return coffeeBeans;
     }
@@ -127,5 +171,21 @@ public class Coffee {
 
     public void setMilk(int milk) {
         this.milk = milk;
+    }
+
+    public int getPlastCups() {
+        return plastCups;
+    }
+
+    public void setPlastCups(int plastCups) {
+        this.plastCups = plastCups;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 }
